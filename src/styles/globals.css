@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.scrollbar {
+  overflow-y: auto;
+}
+
+/* 스크롤바의 폭 너비 */
+.scrollbar::-webkit-scrollbar {
+  width: 1px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(0deg, #b46ef3, #877ee9);
+  /* background-color: #3e248b;  */
+  /* 스크롤바 색상 */
+  border-radius: 10px; /* 스크롤바 둥근 테두리 */
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: #020617; /*스크롤바 뒷 배경 색상*/
+}
+
+
+.custom-border {
+  display: flex;
+  flex-basis: 100%;
+  align-items: center;
+}
+.custom-border::before,
+.custom-border::after {
+  content: '';
+  flex-grow: 1;
+  background: rgba(0, 0, 0, 0.35);
+  height: 1px;
+  font-size: 0px;
+  line-height: 0px;
+}
+
+.custom-border::before {
+  margin-right: 16px;
+}
+
+.custom-border::after {
+  margin-left: 16px;
+}

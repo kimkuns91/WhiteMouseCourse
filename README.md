@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Couse Model Schema
 
-## Getting Started
+# 강의(Course) 모델
 
-First, run the development server:
+강의 제목 (title): String
+강의 난이도 (difficulty): String (예: Beginner, Intermediate, Advanced)
+강의 카테고리 (category): String
+강의에 사용되는 기술 (technologies): String[]
+강의 동영상 개수 (videoCount): Int
+강의 분량 (duration): String (예: "10 hours")
+강의 설명 (description): String (HTML 형식 또는 마크다운)
+강의 생성일자 (createdAt): DateTime
+강의 공개일자 (publishedAt): DateTime
+강의 업데이트 일자 (updatedAt): DateTime
+무료/유료 (isFree): Boolean
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# 챕터(Chapter) 모델
+챕터 제목 (title): String
+속한 강의 (course): Relation to Course
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# 렉처(Lecture) 모델
+강의 제목 (title): String
+깃허브 주소 (githubUrl): String
+동영상 URL (videoUrl): String
+동영상 길이 (videoLength): String (예: "15 minutes")
+강의 설명 (description): String (HTML 형식)
+속한 챕터 (chapter): Relation to Chapter
