@@ -3,58 +3,70 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id              String      @id @default(auto()) @map("_id") @db.ObjectId
-  email           String      @unique
-  name            String 
-  profileImg      String      @default("/images/noUser.webp")
+  id              String   @id @default(uuid()) // PostgreSQL에서 UUID 사용
+  email           String   @unique
+  name            String
+  profileImg      String   @default("/images/noUser.webp")
   password        String
-  role            Role        @default(USER)
-  provider        String      @default("credentials")
-  createdAt       DateTime    @default(now())
-  emailVerified   DateTime?   @map("verifiedAt")
-
-  @@map("users")
+  role            Role     @default(USER)
+  provider        String   @default("credentials")
+  createdAt       DateTime @default(now())
+  emailVerified   DateTime?
+  completedLectures CompletedLecture[]
 }
 
 model Course {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  image       String
-  title       String
-  difficulty  String
-  category    String
-  technologies String[]
-  videoCount  Int
-  duration    String
-  description String
-  createdAt   DateTime  @default(now())
-  publishedAt DateTime?
-  updatedAt   DateTime? @updatedAt
-  isFree      Boolean
-  chapters    Chapter[]
+  id            String    @id @default(uuid())
+  image         String
+  title         String
+  difficulty    String
+  category      String
+  technologies  String[]
+  videoCount    Int
+  duration      String
+  description   String
+  createdAt     DateTime  @default(now())
+  publishedAt   DateTime?
+  updatedAt     DateTime? @updatedAt
+  isFree        Boolean
+  chapters      Chapter[]
 }
 
 model Chapter {
-  id      String   @id @default(auto()) @map("_id") @db.ObjectId
-  title   String
-  courseId String  @db.ObjectId
-  course  Course   @relation(fields: [courseId], references: [id])
-  lectures Lecture[]
+  id        String   @id @default(uuid())
+  title     String
+  courseId  String
+  course    Course   @relation(fields: [courseId], references: [id])
+  lectures  Lecture[]
 }
 
 model Lecture {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
-  githubUrl   String?
-  videoUrl    String
-  videoLength String
-  description String
-  chapterId   String   @db.ObjectId
-  chapter     Chapter  @relation(fields: [chapterId], references: [id])
+  id              String   @id @default(uuid())
+  title           String
+  githubUrl       String?
+  videoUrl        String
+  videoLength     String
+  description     String
+  chapterId       String
+  chapter         Chapter  @relation(fields: [chapterId], references: [id])
+  completedLectures CompletedLecture[]
+}
+
+model CompletedLecture {
+  id            String   @id @default(uuid())
+  userId        String
+  lectureId     String
+  completedAt   DateTime @default(now())
+
+  user          User     @relation(fields: [userId], references: [id])
+  lecture       Lecture  @relation(fields: [lectureId], references: [id])
+
+  @@unique([userId, lectureId])
 }
 
 enum Role {

@@ -77,3 +77,28 @@ export const getLectureById = async (id: string) => {
     throw new Error("Fetching lecture failed");
   }
 };
+
+export const markLectureAsCompleted = async (
+  userId: string,
+  lectureId: string
+) => {
+  const completedLecture = await prisma.completedLecture.create({
+    data: {
+      userId,
+      lectureId,
+    },
+  });
+  return completedLecture;
+};
+
+export const getCompletedLecturesForUser = async (userId: string) => {
+  const completedLectures = await prisma.completedLecture.findMany({
+    where: {
+      userId,
+    },
+    include: {
+      lecture: true, // 강의 정보도 함께 조회
+    },
+  });
+  return completedLectures;
+};
