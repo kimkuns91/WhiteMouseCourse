@@ -50,7 +50,7 @@ const CourseContent: React.FC<CourseContentProps> = ({
   };
 
   return (
-    <div className={cn("scrollbar w-full overflow-y-scroll p-8")}>
+    <div className={cn("scrollbar w-full overflow-y-scroll p-8", 'bg-[#FFFFFF]')}>
       <div className={cn("container flex flex-col gap-8")}>
         <div className="mb-8 flex w-full items-center justify-between">
           <button

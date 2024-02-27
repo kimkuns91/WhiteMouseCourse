@@ -31,15 +31,19 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ color, statistics }) => {
     <div className="flex flex-col items-center">
       <div
         className={cn(
-          "mr-3 h-6 w-full overflow-hidden rounded-full bg-gray-200"
+          "mr-3 h-5 w-full overflow-hidden rounded-full bg-[#F2F7F4]",
+          "border-2 border-slate-300"
         )}
       >
         <div
-          className="h-6 rounded-full transition-all duration-500 ease-out"
-          style={{ width: `${width}%`, backgroundColor: color }} // 직접 넘겨받은 color 사용
+          className="gradient h-4 rounded-full transition-all duration-500 ease-out"
+          style={{
+            width: `${width}%`,
+            // backgroundColor: color
+          }} // 직접 넘겨받은 color 사용
         />
       </div>
-      <div className="text-sm font-medium text-gray-700">
+      <div className="mt-4 text-sm font-medium text-gray-700">
         {percentage} % Complete
       </div>
     </div>

@@ -8,7 +8,7 @@ import { getServerSession } from "next-auth";
 import { Noto_Sans_KR } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 
-export const noto = Noto_Sans_KR({
+const noto_sans_kr = Noto_Sans_KR({
   weight: ["400"],
   subsets: ["latin"],
 });
@@ -30,7 +30,7 @@ export default async function RootLayout({
         className={cn(
           "scrollbar overflow-x-hidden bg-[#f3eeea] text-sm",
           "lg:text-base",
-          noto.className
+          noto_sans_kr.className
         )}
       >
         <SessionProvider session={session}>

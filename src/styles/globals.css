@@ -21,7 +21,20 @@
 .scrollbar::-webkit-scrollbar-track {
   background: #020617; /*스크롤바 뒷 배경 색상*/
 }
+.gradient {
+  background-image: linear-gradient(45deg, #615bff, #CC5CFF, #615bff);
+  background-size: 300% auto;
+  animation: gradientMove 5s infinite ease-in-out;
+}
 
+@keyframes gradientMove {
+  0% {
+    background-position: 300% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 
 .custom-border {
   display: flex;
@@ -30,7 +43,7 @@
 }
 .custom-border::before,
 .custom-border::after {
-  content: '';
+  content: "";
   flex-grow: 1;
   background: rgba(0, 0, 0, 0.35);
   height: 1px;

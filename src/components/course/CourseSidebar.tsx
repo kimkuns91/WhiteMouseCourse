@@ -32,30 +32,36 @@ const CourseSidebar: React.FC<CourseSidebarProps> = ({
   const completionRate =
     totalLectures > 0 ? completedLectures.length / totalLectures : 0;
 
-  console.log(completionRate)
+  console.log(completionRate);
   return (
     <div
       className={cn(
-        "scrollbar h-full w-[400px] overflow-y-auto bg-[#c3f2ff]",
+        "scrollbar h-full w-[400px] bg-[#5CBEFF]",
         "transition-all ease-in-out",
         isOpen ? "ml-0" : "ml-[-400px]"
       )}
     >
-      <div className="flex flex-col gap-4 bg-[#b6e7ff] p-8 text-center">
+      <div
+        className={cn(
+          "sticky top-0 flex flex-col gap-4 bg-[#5CBEFF] p-8 text-center",
+          "shadow-md"
+        )}
+      >
         <h2>{title}</h2>
-        <ProgressBar color={'#71D0FF'} statistics={completionRate} />
+        <ProgressBar color={"#615BFF"} statistics={completionRate} />
       </div>
-      <div className={cn("flex flex-col gap-12 p-8")}>
+      <div className={cn("flex flex-col gap-12 overflow-y-auto p-8")}>
         {Array.isArray(chapters) &&
           chapters.map((chapter, index) => (
             <div
               key={index}
               className={cn(
                 "flex flex-col rounded-xl text-left",
+                'shadow-md',
                 "overflow-hidden"
               )}
             >
-              <h2 className="w-full bg-[#71d0ff] px-6 py-4">
+              <h2 className="w-full bg-[#749cff] px-6 py-4">
                 # {chapter.title}
               </h2>
               {Array.isArray(chapter.lectures) &&
@@ -65,7 +71,7 @@ const CourseSidebar: React.FC<CourseSidebarProps> = ({
                     className={cn(
                       "w-full  px-6 py-4 text-left",
                       "flex items-center justify-between",
-                      index % 2 !== 0 ? "bg-[#D0F2FE]" : "bg-[#E3F9FF]"
+                      index % 2 !== 0 ? "bg-[#B8DFF9]" : "bg-[#EDFFF7]"
                     )}
                     href={
                       "/course/" + chapter.courseId + "/lecture/" + lecture.id
